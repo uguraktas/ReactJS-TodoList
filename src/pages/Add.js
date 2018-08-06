@@ -9,7 +9,10 @@ function hasErrors(fieldsError) {
 }
 
 class HorizontalLoginForm extends React.Component {
-  
+  constructor(props){
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   componentDidMount() {
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
@@ -73,12 +76,13 @@ export default class Add extends Component {
     super(props);
     this.state = {
     };
+    
   }
   render() {
     return (
       <div>
         <Card title="New Todo List Add"  >
-          <WrappedHorizontalLoginForm />
+          <WrappedHorizontalLoginForm {...this.props} />
         </Card>
       </div>
     )

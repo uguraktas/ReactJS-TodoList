@@ -19,8 +19,6 @@ export default class FormList extends Component {
     this.state = {
     }
   }
-  componentWillMount(){
-  }
 
   render() {
     
@@ -45,7 +43,7 @@ export default class FormList extends Component {
                 <span>
                   <Button type="primary">Edit</Button>
                   <Divider type="vertical" />
-                  <Button type="danger">Delete</Button>
+                  <Button type="danger">Delete </Button>
                 </span>
               )}
             />

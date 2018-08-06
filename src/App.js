@@ -17,19 +17,22 @@ class App extends Component {
     }
     this.handleTodoAdd = this.handleTodoAdd.bind(this);
   }
-
   handleTodoAdd(value) {
-    console.log('HandleTodo ADD kısmı', value)
-    // let newTodo = {
-    //   id: this.state.todos.length + 1,
-    //   content: value
-    // }
-    // this.setState({ todos: this.state.todos.concat(newTodo) });
+    let newTodo = {
+      key: this.state.todos.length + 1,
+      dateTime: value.dateTime,
+      todonote: value.todonote
+    }
+    this.firebaseRef.push(newTodo)
   }
   componentDidMount() {
     this.firebaseRef = firebase.database().ref('todos');
     this.firebaseCallback = this.firebaseRef.on('value', (snap) => {
-      this.setState({ todos: snap.val() });
+      let todoStores = [];
+      snap.forEach((cSnap) => {
+        todoStores.push(cSnap.val());
+      })
+      this.setState({ todos: todoStores });
     });
   }
 
@@ -61,12 +64,12 @@ class App extends Component {
             <Content className="todoBody">
               <Switch>
                 <Route exact path='/' render={(props) => (
-                  <Home {...this.state} {...props}  />
+                  <Home {...this.state} {...props} />
                 )} />
                 <Route exact path='/Add' render={(props) => (
-                  <Add {...this.state} {...props}  onTodoAdd={this.handleTodoAdd}  />
+                  <Add {...this.state} {...props} onTodoAdd={this.handleTodoAdd} />
                 )} />
-               
+
 
 
               </Switch>
