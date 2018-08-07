@@ -19,9 +19,11 @@ export default class FormList extends Component {
     this.state = {
     }
   }
-
+ 
+  onDelete(key){
+    this.props.onDelete(key);
+  }
   render() {
-    
     return (
       <div>
         <Card title="Todo List" >
@@ -43,7 +45,7 @@ export default class FormList extends Component {
                 <span>
                   <Button type="primary">Edit</Button>
                   <Divider type="vertical" />
-                  <Button type="danger">Delete </Button>
+                  <Button onClick={this.onDelete.bind(this, record.key)} type="danger">Delete </Button>
                 </span>
               )}
             />
@@ -52,5 +54,6 @@ export default class FormList extends Component {
       </div>
     )
   }
+
   
 }

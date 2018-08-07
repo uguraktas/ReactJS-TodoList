@@ -4,7 +4,7 @@ import FormList from "../components/FormList";
 export default class Home extends Component {
   constructor(props){
     super(props);
-    this.state ={
+    this.state = {
     }
   }
 
@@ -12,7 +12,7 @@ export default class Home extends Component {
 
     return (
       <div>
-        <FormList todosL={this.props.todos}  />
+        <FormList {...this.state} onDelete={this.props.onDelete} todosL={this.props.todos}  />
       </div>
     )
   }

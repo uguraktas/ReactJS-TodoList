@@ -16,6 +16,17 @@ class App extends Component {
       todos: []
     }
     this.handleTodoAdd = this.handleTodoAdd.bind(this);
+    this.handleTodoDelete = this.handleTodoDelete.bind(this);
+  }
+  handleTodoDelete(todo) {
+    let todos = this.state.todos;
+    for (var i = 0; i < todos.length; i++) {
+      if (todos[i].id == todo.id) {
+        todos.splice(i, 1);
+        this.firebaseRef.set(todos)
+      }
+    }
+    this.setState({ todos: todos });
   }
   handleTodoAdd(value) {
     let newTodo = {
@@ -64,14 +75,11 @@ class App extends Component {
             <Content className="todoBody">
               <Switch>
                 <Route exact path='/' render={(props) => (
-                  <Home {...this.state} {...props} />
+                  <Home {...this.state} {...props} onDelete={this.handleTodoDelete} />
                 )} />
                 <Route exact path='/Add' render={(props) => (
                   <Add {...this.state} {...props} onTodoAdd={this.handleTodoAdd} />
                 )} />
-
-
-
               </Switch>
             </Content>
           </Layout>
